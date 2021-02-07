@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import VueCarousel from 'vue-carousel'
+
 import App from './App.vue'
 
 import VueRouter from 'vue-router'
@@ -12,6 +14,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
+
+Vue.use(VueCarousel)
 
 import { MdButton, MdToolbar, MdMenu } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'

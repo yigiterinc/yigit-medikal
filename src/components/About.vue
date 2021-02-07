@@ -23,11 +23,9 @@ export default {
         padding-top: 30px;
         padding-bottom: 30px;
         width: 100%;
-        background: rgba(240, 235, 235, 0);
         padding-right: 8%;
         padding-left: 8%;
-        background: rgba(218, 231, 232, 70%);
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        box-shadow: 0 8px 6px -6px #9BB0B3;
     }
 
     .about h1 {

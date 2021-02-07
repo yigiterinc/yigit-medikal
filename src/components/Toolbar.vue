@@ -1,5 +1,5 @@
 <template>
-    <md-toolbar class="md-transparent">
+    <md-toolbar>
         <h3 class="md-title">Yiğit Medikal</h3>
         <div class="md-toolbar-section-end">
             <dropdown-menu
@@ -15,7 +15,11 @@
                 <div slot="dropdown">
                     <p class="dropdown-item">Varis Çorapları</p>
                     <p class="dropdown-item">Tansiyon Aletleri</p>
+                    <p class="dropdown-item">Solunum Cihazları</p>
                     <p class="dropdown-item">Tabanlıklar</p>
+                    <p class="dropdown-item">Ortopedik Ürünler</p>
+                    <p class="dropdown-item">Lenf Ödem Ürünleri</p>
+                    <p class="dropdown-item">Fizik Tedavi Ürünleri</p>
                 </div>
             </dropdown-menu>
 
@@ -53,15 +57,9 @@ export default {
 <style>
 
     .md-toolbar-section-end p {
-        margin-right: 3rem;
+        margin-right: 2rem;
         margin-bottom: 0px;
+        font-size: 18px;
     }
 
-    .dropdown-toggle {
-        margin-bottom: 0px;
-    }
-
-    .dropdown-toggle::after {
-        visibility: none;
-    }
 </style>

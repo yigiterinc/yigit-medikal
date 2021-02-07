@@ -1,22 +1,36 @@
 <template>
   <div class="home">
-    <toolbar></toolbar>
+    <carousel :perPage="1" :autoplay="true" :autoplayTimeout="5000" :paginationColor="'rgb(213, 207, 198)'">
+      <slide>
+        <img src="../assets/allianzsgiorta-logo.png" alt="">
+      </slide>
+      <slide>
+        <img src="../assets/allianzsgiorta-logo.png" alt="">
+      </slide>
+      <slide>
+        <img src="../assets/allianzsgiorta-logo.png" alt="">
+      </slide>
+      <slide>
+        <img src="../assets/allianzsgiorta-logo.png" alt="">
+      </slide>
+    </carousel>
     <about></about>
     <contact></contact>
   </div>
 </template>
 
 <script>
-import Toolbar from '../components/Toolbar.vue';
 import About from '../components/About.vue'
 import Contact from '../components/Contact.vue'
+import { Carousel, Slide } from 'vue-carousel';
 
 export default {
   name: 'Home',
   components: {
-    Toolbar, 
     About,
-    Contact
+    Contact,
+    Carousel,
+    Slide
   },
   data() {
     return {
@@ -27,5 +41,11 @@ export default {
 
 <style>
 
+  .VueCarousel {
+    padding-bottom: 2vh;
+    box-shadow: 0 8px 6px -6px #9BB0B3;
+  }
 
+  .VueCarousel-pagination {
+  }
 </style>
