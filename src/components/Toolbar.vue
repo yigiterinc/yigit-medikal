@@ -9,7 +9,7 @@
                 :hover-timeout="100"
                 :styles=dropdownStyles
             >
-                <p>
+                <p v-on:click="redirectTo('/urunler')">
                     Ürünler
                 </p>
                 <div slot="dropdown">

@@ -2,16 +2,16 @@
   <div class="home">
     <carousel :perPage="1" :autoplay="true" :autoplayTimeout="5000" :paginationColor="'rgb(213, 207, 198)'">
       <slide>
-        <img src="../assets/allianzsgiorta-logo.png" alt="">
+        <img src="../../public/images/allianzsgiorta-logo.png" alt="">
       </slide>
       <slide>
-        <img src="../assets/allianzsgiorta-logo.png" alt="">
+        <img src="../../public/images/allianzsgiorta-logo.png" alt="">
       </slide>
       <slide>
-        <img src="../assets/allianzsgiorta-logo.png" alt="">
+        <img src="../../public/images/allianzsgiorta-logo.png" alt="">
       </slide>
       <slide>
-        <img src="../assets/allianzsgiorta-logo.png" alt="">
+        <img src="../../public/images/allianzsgiorta-logo.png" alt="">
       </slide>
     </carousel>
     <about></about>
