@@ -1,7 +1,9 @@
 <template>
-  <div v-if="this.products">
-    <b-container>
-      <b-row v-for="(productGroup, index) in groupedPaginatedProducts" :key="index">
+  <div class="products" v-if="this.products">
+    <b-container class="pt-4">
+      <b-row v-for="(productGroup, index) in groupedPaginatedProducts"
+             class="mb-4"
+             :key="index">
         <b-col v-for="(product) in productGroup"  :key="product.id">
           <div>
             <img class="product-image" :src="product.photo_path" alt="">
@@ -11,13 +13,15 @@
         </b-col>
       </b-row>
 
-      <b-row>
+      <b-row class="justify-content-center">
         <b-pagination
-            @change="onPageChanged"
             v-model="currentPage"
             :total-rows="rows"
             :per-page="perPage"
-            aria-controls="data">
+            @change="onPageChanged"
+            pills
+            class="pagination-style mt-4"
+        >
         </b-pagination>
       </b-row>
     </b-container>
@@ -33,14 +37,16 @@
     data() {
       return {
         products: null,
+        filteredProducts: null,
         paginatedProducts: this.products,
         perPage: 9,
-        currentPage: 1
+        currentPage: 1,
+        productType: ''
       }
     },
     methods: {
       paginate(page_size, page_number) {
-        let itemsToParse = this.products;
+        let itemsToParse = this.filteredProducts;
         this.paginatedProducts = itemsToParse.slice(page_number * page_size, (page_number + 1) * page_size
         );
       },
@@ -56,18 +62,54 @@
         return _.chunk(this.paginatedProducts, 3);
       }
     },
+    watch: {
+      '$route.params.type': {
+        handler: function (val) {
+          if (this.productType) {
+            console.log(val);
+            this.productType = val;
+            this.filteredProducts = this.products.filter(product => product.type.name === val)
+          }
+        },
+        deep: true,
+        immediate: true
+      },
+      productType: function () {
+          if (this.filteredProducts) {
+            console.log(this.filteredProducts)
+            this.paginate(this.perPage, 0);
+          }
+      }
+    },
     mounted() {
       this.paginate(this.perPage, 0);
     },
     created() {
-      this.products = Products.PRODUCTS
+      this.products = Products.PRODUCTS;
+      this.productType = this.$route.params.type;
+
+      if (this.productType) {
+        this.filteredProducts = this.products.filter(product => product.type.name === this.productType)
+      }
     }
   }
 </script>
 
 <style scoped>
+
+  .products {
+    height: 100vh;
+    position: relative;
+  }
   .product-image {
     height: 200px;
     width: 200px;
+  }
+
+  .pagination-style {
+    position: absolute;
+    bottom: 20px;
+    margin-top: 60px;
+    margin-bottom: 50px;
   }
 </style>

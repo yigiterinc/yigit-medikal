@@ -1,6 +1,6 @@
 export const TYPES = {
     VARIS_CORABI: {
-        name: "VARIS_CORABI",
+        name: "varis-coraplari",
         attributes: {
             "DIZ_ALTI": "Diz Altı Çoraplar",
             "DIZ_USTU": "Diz Üstü Çoraplar"
@@ -11,7 +11,7 @@ export const TYPES = {
         }
     },
     TANSIYON_ALETI: {
-        name: "TANSIYON_ALETI",
+        name: "tansiyon-aletleri",
         attributes: {
             "KOLDAN_OLCUMLU": "Koldan Ölçüm",
             "BILEKTEN_OLCUMLU": "Bilekten Ölçüm"
@@ -22,7 +22,7 @@ export const TYPES = {
         }
     },
     SOLUNUM_CIHAZI: {
-        name: "SOLUNUM_CIHAZI",
+        name: "solunum-cihazlari",
         attributes: {
 
         },
@@ -32,7 +32,7 @@ export const TYPES = {
         }
     },
     TABANLIK: {
-        name: "TABANLIK",
+        name: "tabanliklar",
         attributes: {
             "KISIYE_OZEL_TABANLIK": "Kişiye Özel Tabanlık",
             "HAZIR_TABANLIK": "Hazır Tabanlık"
@@ -40,6 +40,27 @@ export const TYPES = {
         brands: {
             SIGVARIS: "SIGVARIS",
             MEDI: "MEDI"
+        }
+    },
+    FIZIK_TEDAVI_URUNLERI: {
+        name: "fizik-tedavi-urunleri",
+        attributes: {
+        },
+        brands: {
+        }
+    },
+    ORTOPEDIK_URUNLER: {
+        name: "ortopedik-urunler",
+        attributes: {
+        },
+        brands: {
+        }
+    },
+    LENF_ODEM_URUNLERI: {
+        name: "lenf-odem-urunleri",
+        attributes: {
+        },
+        brands: {
         }
     },
 }

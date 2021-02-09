@@ -7,7 +7,7 @@ export default {
             name: "Traveno Ad (Diz Altı) Varis Çorabı",
             type: TYPES.VARIS_CORABI,
             attributes: [
-              TYPES.VARIS_CORABI.attributes.DIZ_ALTI
+                TYPES.VARIS_CORABI.attributes.DIZ_ALTI
             ],
             brand: TYPES.VARIS_CORABI.brands.SIGVARIS,
             photo_path: "/images/sigvaris_traveno.jpg"
@@ -124,36 +124,6 @@ export default {
         },
         {
             id: 13,
-            name: "Mediven PLUS Dizüstü Varis Çorabı SİLİKON BANDLI CCL 3 BURNU AÇIK",
-            type: TYPES.VARIS_CORABI,
-            attributes: [
-                TYPES.VARIS_CORABI.attributes.DIZ_USTU
-            ],
-            brand: TYPES.VARIS_CORABI.brands.MEDI,
-            photo_path: "/images/Mediven_Plus_Dizustu_Silikon_Bandli_CCL3_Burnu_Acik.jpg"
-        },
-        {
-            id: 14,
-            name: "Mediven PLUS Dizüstü Varis Çorabı SİLİKON BANDLI CCL 3 BURNU AÇIK",
-            type: TYPES.VARIS_CORABI,
-            attributes: [
-                TYPES.VARIS_CORABI.attributes.DIZ_USTU
-            ],
-            brand: TYPES.VARIS_CORABI.brands.MEDI,
-            photo_path: "/images/Mediven_Plus_Dizustu_Silikon_Bandli_CCL3_Burnu_Acik.jpg"
-        },
-        {
-            id: 15,
-            name: "Mediven PLUS Dizüstü Varis Çorabı SİLİKON BANDLI CCL 3 BURNU AÇIK",
-            type: TYPES.VARIS_CORABI,
-            attributes: [
-                TYPES.VARIS_CORABI.attributes.DIZ_USTU
-            ],
-            brand: TYPES.VARIS_CORABI.brands.MEDI,
-            photo_path: "/images/Mediven_Plus_Dizustu_Silikon_Bandli_CCL3_Burnu_Acik.jpg"
-        },
-        {
-            id: 16,
             name: "Mediven PLUS Dizüstü Varis Çorabı SİLİKON BANDLI CCL 3 BURNU AÇIK",
             type: TYPES.VARIS_CORABI,
             attributes: [
