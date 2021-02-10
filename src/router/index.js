@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/urunler/:type?',
     name: 'Urunler',
-    component: () => import("@/components/Products.vue")
+    component: () => import("@/views/Products.vue")
   }
 ]
 

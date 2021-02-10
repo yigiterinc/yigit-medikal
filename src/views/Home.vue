@@ -1,17 +1,11 @@
 <template>
   <div class="home">
-    <carousel :perPage="1" :autoplay="true" :autoplayTimeout="5000" :paginationColor="'rgb(213, 207, 198)'">
-      <slide>
-        <img src="../../public/images/allianzsgiorta-logo.png" alt="">
-      </slide>
-      <slide>
-        <img src="../../public/images/allianzsgiorta-logo.png" alt="">
-      </slide>
-      <slide>
-        <img src="../../public/images/allianzsgiorta-logo.png" alt="">
-      </slide>
-      <slide>
-        <img src="../../public/images/allianzsgiorta-logo.png" alt="">
+    <carousel :perPage=imagePerPage
+              :autoplay="true"
+              :autoplayTimeout=imageChangeTimeInMs
+              :paginationColor="'rgb(213, 207, 198)'">
+      <slide v-for="(imageLink, index) in sliderImages" :key="index">
+        <img :src=imageLink alt="">
       </slide>
     </carousel>
     <about></about>
@@ -34,18 +28,22 @@ export default {
   },
   data() {
     return {
+      imagePerPage: 1,
+      imageChangeTimeInMs: 5000,
+      sliderImages: [
+          "/images/allianzsgiorta-logo.png",
+          "/images/allianzsgiorta-logo.png",
+          "/images/allianzsgiorta-logo.png",
+          "/images/allianzsgiorta-logo.png",
+      ]
     }
   }
 }
 </script>
 
 <style>
-
   .VueCarousel {
     padding-bottom: 2vh;
     box-shadow: 0 8px 6px -6px #9BB0B3;
-  }
-
-  .VueCarousel-pagination {
   }
 </style>

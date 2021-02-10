@@ -1,6 +1,6 @@
 <template>
   <md-toolbar>
-    <h3 class="md-title">Yiğit Medikal</h3>
+    <h3 class="md-title"><router-link to="/">Yiğit Medikal</router-link></h3>
     <div class="md-toolbar-section-end">
       <dropdown-menu
           v-model="show"
@@ -19,85 +19,93 @@
         </div>
       </dropdown-menu>
 
-      <p class="toolbar-link">Hakkımızda</p>
-      <p class="toolbar-link">İletişim</p>
+      <p class="toolbar-link" @click="scrollToElementWithClassName('about')" > Hakkımızda</p>
+      <p class="toolbar-link" @click="scrollToElementWithClassName('contact')" >İletişim</p>
     </div>
   </md-toolbar>
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
-import UtilsMixin from '../mixins/UtilsMixin.js'
-import DropdownMenu from '@innologica/vue-dropdown-menu'
+  import DropdownMenu from '@innologica/vue-dropdown-menu'
+  import { TYPES } from "@/data/types"
 
-import { TYPES } from "@/data/types"
+  export default {
+    name: 'Toolbar',
+    components: {
+      DropdownMenu
+    },
+    data() {
+      return {
+        show: false,
+        showProducts: false,
+        dropdownStyles: {
+          marginTop: "10px",
+          cursor: "pointer"
+        },
+        dropdownLinks: [
+          {
+            name: "Varis Çorapları",
+            url: () => '/urunler/' + TYPES.VARIS_CORABI.name
+          },
+          {
+            name: "Tansiyon Aletleri",
+            url: () => '/urunler/' + TYPES.TANSIYON_ALETI.name
+          },
+          {
+            name: "Tabanlıklar",
+            url: () => '/urunler/' + TYPES.TABANLIK.name
+          },
+          {
+            name: "Ortopedik Ürünler",
+            url: () => '/urunler/' + TYPES.ORTOPEDIK_URUNLER.name
+          },
+          {
+            name: "Lenf Ödem Ürünleri",
+            url: () => '/urunler/' + TYPES.LENF_ODEM_URUNLERI.name
+          },
+          {
+            name: "Fizik Tedavi Ürünleri",
+            url: () => '/urunler/' + TYPES.FIZIK_TEDAVI_URUNLERI.name
+          },
+          {
+            name: "Solunum Cihazları",
+            url: () => '/urunler/' + TYPES.SOLUNUM_CIHAZI.name
+          }
+        ]
+      }
+    },
+    methods: {
+      scrollToElementWithClassName(className) {
+        const el = document.getElementsByClassName(className)[0];
 
-export default {
-  name: 'Toolbar',
-  mixins: [UtilsMixin],
-  components: {
-    DropdownMenu
-  },
-  data() {
-    return {
-      show: false,
-      showProducts: false,
-      dropdownStyles: {
-        marginTop: "10px",
-        cursor: "pointer"
-      },
-      dropdownLinks: [
-        {
-          name: "Varis Çorapları",
-          url: () => '/urunler/' + TYPES.VARIS_CORABI.name
-        },
-        {
-          name: "Tansiyon Aletleri",
-          url: () => '/urunler/' + TYPES.TANSIYON_ALETI.name
-        },
-        {
-          name: "Tabanlıklar",
-          url: () => '/urunler/' + TYPES.TABANLIK.name
-        },
-        {
-          name: "Ortopedik Ürünler",
-          url: () => '/urunler/' + TYPES.ORTOPEDIK_URUNLER.name
-        },
-        {
-          name: "Lenf Ödem Ürünleri",
-          url: () => '/urunler/' + TYPES.LENF_ODEM_URUNLERI.name
-        },
-        {
-          name: "Fizik Tedavi Ürünleri",
-          url: () => '/urunler/' + TYPES.FIZIK_TEDAVI_URUNLERI.name
-        },
-        {
-          name: "Solunum Cihazları",
-          url: () => '/urunler/' + TYPES.SOLUNUM_CIHAZI.name
+        if (el) {
+          el.scrollIntoView({behavior: 'smooth'});
         }
-      ]
+      }
     }
   }
-}
-
-
 </script>
 
 <style>
 
-.md-toolbar-section-end .toolbar-link {
-  margin-right: 2rem;
-  margin-bottom: 0px;
-  font-size: 18px;
-}
+  .md-toolbar a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
 
-.md-toolbar-section-end a {
-  text-decoration: none !important;
-  color: inherit !important;
-}
+  .md-toolbar-section-end .toolbar-link {
+    margin-right: 2rem;
+    margin-bottom: 0px;
+    font-size: 20px;
+  }
 
-.md-toolbar-section-end .toolbar-link:hover {
-  cursor: pointer;
-}
+  .md-toolbar-section-end a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+
+  .md-toolbar-section-end .toolbar-link:hover {
+    cursor: pointer;
+  }
 
 </style>
