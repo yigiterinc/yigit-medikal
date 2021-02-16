@@ -1,5 +1,5 @@
 <template>
-  <div class="products" v-if="this.product.products">
+  <div class="products" v-if="this.products">
     <b-container class="products-main-container pt-4">
       <b-row>
         <b-col v-if="productCategoryIsNotEmpty" class="col-sm-3">
@@ -53,13 +53,10 @@
     },
     data() {
       return {
-        product: {
-          products: null,
-          productCategory: '',
-          productsFilteredByCategory: null,
-          productsFilteredByBrandAndAttribute: [],
-          paginatedProducts: this.products,
-        },
+        products: null,
+        productCategory: '',
+        productsFiltered: null,
+        paginatedProducts: this.products,
         pagination: {
           perPage: 9,
           currentPage: 1,
@@ -73,43 +70,46 @@
     },
     computed: {
       rows() {
-        return this.product.products.length;
+        return this.products.length;
       },
       groupedPaginatedProducts() {
-        return _.chunk(this.product.paginatedProducts, 3);
+        return _.chunk(this.paginatedProducts, 3);
       },
       productCategoryIsNotEmpty() {
-        return this.product.productCategory !== undefined && this.product.productCategory.length > 0;
+        return this.productCategory !== undefined && this.productCategory.length > 0;
       }
     },
     watch: {
       '$route.params.type': {
         handler: function (val) {
-          if (this.product.productCategory) {
-            console.log(val);
-            this.product.productCategory = val;
-            this.product.productsFilteredByCategory = this.product.products.filter(product => product.type.name === val)
+          if (this.productCategory) {
+            this.productCategory = val;
+            this.fillFilters(TYPES, this.productCategory);
+            this.filterProducts();
           }
         },
         deep: true,
         immediate: true
       },
       productType: function () {
-        if (this.product.productsFilteredByCategory) {
+        if (this.productsFiltered) {
           this.paginate(this.pagination.perPage, 0);
         }
       },
-      brandsSelected: {
+      productsFiltered: {
         handler: function () {
-            console.log('for some random reason, i am broke, fix me please')  // TODO
+          this.paginate(this.pagination.perPage, 0)
         },
-        deep: true
+        deep: true,
+        immediate: true
       }
     },
     methods: {
       paginate(page_size, page_number) {
-          let itemsToParse = this.product.productsFilteredByCategory;
-          this.product.paginatedProducts = itemsToParse.slice(page_number * page_size, (page_number + 1) * page_size);
+        if (!this.productsFiltered) return;
+
+        let itemsToParse = this.productsFiltered;
+        this.paginatedProducts = itemsToParse.slice(page_number * page_size, (page_number + 1) * page_size);
       },
       onPageChanged(page) {
         this.paginate(this.pagination.perPage, page - 1);
@@ -117,10 +117,11 @@
       onOptionSelected({filterIndex, optionIndex, value}) {
         if (filterIndex === this.BRANDS_FILTER_INDEX) {
           this.brandsSelected[optionIndex] = value;
-          console.log(this.brandsSelected)
         } else if (filterIndex === this.ATTRIBUTES_FILTER_INDEX) {
           this.attributesSelected[optionIndex] = value
         }
+
+        this.filterProducts()
       },
       fillFilters(types, productType) {
         for (const key in types) {
@@ -147,21 +148,43 @@
             }
           }
         }
+      },
+      filterProducts() {
+        this.removeAllFilters();
+
+        this.filterByCategory()
+        this.filterByBrands()
+        this.filterByAttributes()
+      },
+      removeAllFilters() {
+        this.productsFiltered = this.products;
+      },
+      filterByCategory() {
+        if (!this.productCategory)  return;
+
+        this.productsFiltered = this.products.filter(product => product.type.name === this.productCategory);
+      },
+      filterByBrands() {
+        if (_.isEmpty(this.brandsSelected)) return;
+
+        this.productsFiltered = this.productsFiltered.filter(product => {
+          Object.values(this.brandsSelected).includes(product.brand);
+        })
+      },
+      filterByAttributes() {
+        if (_.isEmpty(this.brandsSelected)) return;
+
+        this.productsFiltered = this.productsFiltered.filter(product => {
+          // attributesSelected contains any attribute this product has
+          product.attributes.some(attribute => this.attributesSelected.includes(attribute))
+        })
       }
     },
     mounted() {
-      this.paginate(this.pagination.perPage, 0);
-    },
-    created() {
-      this.product.products = Products.PRODUCTS;
-      this.product.productCategory = this.$route.params.type;
-      this.product.productsFilteredByCategory = this.products;
-
-      if (this.product.productCategory) {
-        this.product.productsFilteredByCategory = this.product.products
-            .filter(product => product.type.name === this.product.productCategory)
-        this.fillFilters(TYPES, this.product.productCategory);
-      }
+      this.products = Products.PRODUCTS;
+      this.productCategory = this.$route.params.type;
+      this.fillFilters(TYPES, this.productCategory);
+      this.filterProducts();
     }
   }
 </script>
