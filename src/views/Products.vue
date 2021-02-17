@@ -13,9 +13,16 @@
                :key="index">
           <b-col v-for="product in productGroup" :key="product.id">
             <div>
-              <img class="product-image" :src="product.photo_path" alt="">
-              <br>
-              {{product.name}}
+              <md-card md-with-hover>
+                <md-card-media>
+                  <img :src="product.photo_path" alt="productImage" class="product-image">
+                </md-card-media>
+
+                <md-card-header>
+                  <div class="md-title">{{product.name}}</div>
+                </md-card-header>
+
+              </md-card>
             </div>
           </b-col>
         </b-row>

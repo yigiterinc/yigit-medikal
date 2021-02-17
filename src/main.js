@@ -17,13 +17,15 @@ Vue.use(BootstrapVue)
 
 Vue.use(VueCarousel)
 
-import { MdButton, MdToolbar, MdMenu } from 'vue-material/dist/components'
+import { MdButton, MdToolbar, MdMenu, MdList, MdCard } from 'vue-material/dist/components'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 
 Vue.use(MdToolbar);
 Vue.use(MdButton);
-Vue.use(MdMenu)
+Vue.use(MdMenu);
+Vue.use(MdList);
+Vue.use(MdCard);
 
 Vue.use(VueRouter);
 

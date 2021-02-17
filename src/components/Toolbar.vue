@@ -2,47 +2,41 @@
   <md-toolbar>
     <h3 class="md-title"><router-link to="/">Yiğit Medikal</router-link></h3>
     <div class="md-toolbar-section-end">
-      <dropdown-menu
-          v-model="show"
-          :hover="true"
-          :interactive="false"
-          :hover-timeout="100"
-          :styles=dropdownStyles
-      >
-        <router-link class="toolbar-link" to="/urunler">
-          Ürünler
-        </router-link>
-        <div slot="dropdown">
-          <router-link :to="link.url()" class="dropdown-item" v-for="(link, index) in dropdownLinks" :key=index>
-            {{ link.name }}
-          </router-link>
-        </div>
-      </dropdown-menu>
+      <md-menu md-size="auto" md-align-trigger>
+        <md-button class="nav-button" md-menu-trigger>ÜRÜNLER</md-button>
 
-      <p class="toolbar-link" @click="scrollToElementWithClassName('about')" > Hakkımızda</p>
-      <p class="toolbar-link" @click="scrollToElementWithClassName('contact')" >İletişim</p>
+        <md-menu-content>
+          <md-menu-item v-for="(link, index) in menuContent"
+                        @click="redirectTo(link.url())"
+                        :key="index">
+            {{ link.name }}
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+
+      <md-button class="nav-button">HAKKIMIZDA</md-button>
+      <md-button class="nav-button">İLETİŞİM</md-button>
     </div>
   </md-toolbar>
 </template>
 
 <script>
-  import DropdownMenu from '@innologica/vue-dropdown-menu'
   import { TYPES } from "@/data/types"
 
   export default {
     name: 'Toolbar',
     components: {
-      DropdownMenu
+
     },
     data() {
       return {
         show: false,
         showProducts: false,
-        dropdownStyles: {
+        menuStyles: {
           marginTop: "10px",
           cursor: "pointer"
         },
-        dropdownLinks: [
+        menuContent: [
           {
             name: "Varis Çorapları",
             url: () => '/urunler/' + TYPES.VARIS_CORABI.name
@@ -75,12 +69,8 @@
       }
     },
     methods: {
-      scrollToElementWithClassName(className) {
-        const el = document.getElementsByClassName(className)[0];
-
-        if (el) {
-          el.scrollIntoView({behavior: 'smooth'});
-        }
+      redirectTo(path) {
+        this.$router.push(path);
       }
     }
   }
@@ -93,10 +83,9 @@
     color: inherit !important;
   }
 
-  .md-toolbar-section-end .toolbar-link {
-    margin-right: 2rem;
-    margin-bottom: 0px;
-    font-size: 20px;
+  .md-title {
+    font-weight: 450 !important;
+    font-size: 22px !important;
   }
 
   .md-toolbar-section-end a {
@@ -104,8 +93,15 @@
     color: inherit !important;
   }
 
-  .md-toolbar-section-end .toolbar-link:hover {
-    cursor: pointer;
+  .nav-button {
+    margin: 0 1rem 0 0 !important;
+    font-size: 18px !important;
+    font-weight: 450 !important;
+    height: 40px !important;
+  }
+
+  .md-list-item-container {
+    font-size: 20px !important;
   }
 
 </style>
