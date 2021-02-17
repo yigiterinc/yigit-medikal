@@ -93,26 +93,27 @@
       },
       productType: function () {
         if (this.productsFiltered) {
-          this.paginate(this.pagination.perPage, 0);
+          this.paginate(0);
         }
       },
       productsFiltered: {
         handler: function () {
-          this.paginate(this.pagination.perPage, 0)
+          this.paginate( 0)
         },
         deep: true,
         immediate: true
       }
     },
     methods: {
-      paginate(page_size, page_number) {
+      paginate(pageNumber) {
         if (!this.productsFiltered) return;
 
         let itemsToParse = this.productsFiltered;
-        this.paginatedProducts = itemsToParse.slice(page_number * page_size, (page_number + 1) * page_size);
+        this.paginatedProducts = itemsToParse.slice(pageNumber * this.pagination.perPage,
+                                                   (pageNumber + 1) * this.pagination.perPage);
       },
       onPageChanged(page) {
-        this.paginate(this.pagination.perPage, page - 1);
+        this.paginate( page - 1);
       },
       onOptionSelected({filterIndex, optionIndex, value}) {
         if (filterIndex === this.BRANDS_FILTER_INDEX) {
@@ -165,19 +166,34 @@
         this.productsFiltered = this.products.filter(product => product.type.name === this.productCategory);
       },
       filterByBrands() {
-        if (_.isEmpty(this.brandsSelected)) return;
+        if (this.objectIsEmptyOrFullOfFalseValues(this.brandsSelected))
+          return;
 
-        this.productsFiltered = this.productsFiltered.filter(product => {
-          Object.values(this.brandsSelected).includes(product.brand);
+        let filteredByBrand = [];
+        this.productsFiltered.forEach(product => {
+          if (Object.values(this.brandsSelected).includes(product.brand)) {
+            filteredByBrand.push(product);
+          }
         })
+
+        this.productsFiltered = filteredByBrand;
       },
       filterByAttributes() {
-        if (_.isEmpty(this.brandsSelected)) return;
+        if (this.objectIsEmptyOrFullOfFalseValues(this.attributesSelected))
+          return;
 
-        this.productsFiltered = this.productsFiltered.filter(product => {
-          // attributesSelected contains any attribute this product has
-          product.attributes.some(attribute => this.attributesSelected.includes(attribute))
+        let filteredByAttributes = []
+        this.productsFiltered.forEach(product => {
+          if (Object.values(this.attributesSelected)
+              .some(attribute => Object.values(product.attributes).includes(attribute))) {
+            filteredByAttributes.push(product);
+          }
         })
+
+        this.productsFiltered = filteredByAttributes;
+      },
+      objectIsEmptyOrFullOfFalseValues(obj) {
+        return _.isEmpty(obj) || Object.values(obj).every(value => value === false);
       }
     },
     mounted() {
