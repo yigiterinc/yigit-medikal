@@ -1,19 +1,20 @@
 <template>
   <div class="products" v-if="this.products">
-    <b-container class="products-main-container pt-4">
+    <div class="products-main-container pt-4">
       <b-row>
-        <b-col v-if="productCategoryIsNotEmpty" class="col-sm-3">
+        <b-col class="col-md-2">
+        </b-col>
+
+        <b-col v-if="productCategoryIsNotEmpty" class="col-md-2">
           <product-filter :filters="filters"
                           @optionSelected="onOptionSelected">
           </product-filter>
         </b-col>
-        <b-col>
-        <b-row v-for="(productGroup, index) in groupedPaginatedProducts"
-               class="mb-4"
-               :key="index">
-          <b-col v-for="product in productGroup" :key="product.id">
-            <div>
-              <md-card md-with-hover>
+
+        <b-col class="col-md-6">
+          <div v-for="(productGroup, index) in groupedPaginatedProducts" :key="index">
+            <div class="flexRow">
+              <md-card md-with-hover v-for="product in productGroup" :key="product.id">
                 <md-card-media>
                   <img :src="product.photo_path" alt="productImage" class="product-image">
                 </md-card-media>
@@ -21,12 +22,12 @@
                 <md-card-header>
                   <div class="md-title">{{product.name}}</div>
                 </md-card-header>
-
               </md-card>
             </div>
-          </b-col>
-        </b-row>
+          </div>
+        </b-col>
 
+        <b-col class="col-md-2">
         </b-col>
       </b-row>
 
@@ -41,7 +42,7 @@
         >
         </b-pagination>
       </b-row>
-    </b-container>
+    </div>
   </div>
 </template>
 
@@ -221,19 +222,38 @@
 
   .products-main-container {
     padding-right: 0;
-    margin-right: 25vw;
   }
 
   .product-image {
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    max-width: 300px;
   }
 
   .pagination-style {
-    position: absolute;
     bottom: 20px;
     margin-top: 60px;
     margin-bottom: 50px;
+  }
+
+  .flexRow {
+    display: flex;
+    margin-bottom: 20px;
+  }
+
+  .flexRow > * {
+    flex-grow: 1;
+    flex-basis: 0;
+    margin-right: 10px;
+    max-width: 300px !important;
+  }
+
+  .md-card-header * {
+    font-weight: 450 !important;
+    font-size: 18px !important;
+  }
+
+  .products-main-container .row {
+    background-color: #dae7e8;
   }
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :style="{ backgroundColor: 'rgba(218, 231, 232, 70%)'}">
+  <div id="app" :style="globalStyle">
     <toolbar></toolbar>
     <router-view/>
   </div>
@@ -15,6 +15,9 @@
     },
     data() {
       return {
+        globalStyle: {
+          backgroundColor: "#dae7e8"
+        }
       }
     }
   }
@@ -27,4 +30,5 @@
     width: 100%;
     min-height: 100%;
   }
+
 </style>
