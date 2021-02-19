@@ -2,19 +2,18 @@
   <div class="products" v-if="this.products">
     <div class="products-main-container pt-4">
       <b-row>
-        <b-col class="col-md-2">
+        <b-col class="col-md-1 col-lg-1 col-xl-2 d-none d-md-block">
         </b-col>
 
-        <b-col v-if="productCategoryIsNotEmpty" class="col-md-2">
+        <b-col v-if="productCategoryIsNotEmpty" class="col-sm-3 col-md-3 col-lg-3 col-xl-2 d-none d-sm-block">
           <product-filter :filters="filters"
                           @optionSelected="onOptionSelected">
           </product-filter>
         </b-col>
 
-        <b-col class="col-md-6">
-          <div v-for="(productGroup, index) in groupedPaginatedProducts" :key="index">
+        <b-col>
             <div class="flex-container">
-              <md-card md-with-hover v-for="product in productGroup" :key="product.id">
+              <md-card md-with-hover v-for="product in paginatedProducts" :key="product.id">
                 <md-card-media>
                   <img :src="product.photo_path" alt="productImage" class="product-image">
                 </md-card-media>
@@ -24,10 +23,9 @@
                 </md-card-header>
               </md-card>
             </div>
-          </div>
         </b-col>
 
-        <b-col class="col-md-2">
+        <b-col class="col-md-1 col-lg-1 col-xl-2 d-none d-md-block">
         </b-col>
       </b-row>
 
@@ -79,9 +77,6 @@
     computed: {
       rows() {
         return this.products.length;
-      },
-      groupedPaginatedProducts() {
-        return _.chunk(this.paginatedProducts, 3);
       },
       productCategoryIsNotEmpty() {
         return this.productCategory !== undefined && this.productCategory.length > 0;
@@ -225,8 +220,8 @@
   }
 
   .product-image {
-    height: 200px;
-    max-width: 300px;
+    height: auto;
+    max-width: 100%;
   }
 
   .pagination-style {
@@ -237,15 +232,15 @@
 
   .flex-container {
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 20px;
   }
 
-  .flex-container > * {
-    flex-grow: 1;
-    flex-basis: 0;
-    margin-right: 10px;
-    max-width: 20vw !important;
-    max-height: 48vh !important;
+  .flex-container .md-card {
+    margin-bottom: 15px;
+    margin-right: 15px;
+
+    flex-basis: calc(33.333333% - 15px);
   }
 
   .md-card-header {
@@ -254,11 +249,19 @@
 
   .md-card-header * {
     font-weight: 450 !important;
-    font-size: 15px !important;
+    font-size: 16px !important;
+    line-height: 22px;
   }
 
-  .products-main-container .row {
+  .products-main-container {
     background-color: #dae7e8;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .products-main-container {
+      padding-left: 30px;
+      padding-right: 20px;
+    }
   }
 
 </style>
