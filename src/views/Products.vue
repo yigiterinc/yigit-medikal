@@ -13,7 +13,7 @@
 
         <b-col class="col-md-6">
           <div v-for="(productGroup, index) in groupedPaginatedProducts" :key="index">
-            <div class="flexRow">
+            <div class="flex-container">
               <md-card md-with-hover v-for="product in productGroup" :key="product.id">
                 <md-card-media>
                   <img :src="product.photo_path" alt="productImage" class="product-image">
@@ -225,7 +225,7 @@
   }
 
   .product-image {
-    height: 300px;
+    height: 200px;
     max-width: 300px;
   }
 
@@ -235,21 +235,26 @@
     margin-bottom: 50px;
   }
 
-  .flexRow {
+  .flex-container {
     display: flex;
     margin-bottom: 20px;
   }
 
-  .flexRow > * {
+  .flex-container > * {
     flex-grow: 1;
     flex-basis: 0;
     margin-right: 10px;
-    max-width: 300px !important;
+    max-width: 20vw !important;
+    max-height: 48vh !important;
+  }
+
+  .md-card-header {
+    padding: 20px 10px 10px 10px !important;
   }
 
   .md-card-header * {
     font-weight: 450 !important;
-    font-size: 18px !important;
+    font-size: 15px !important;
   }
 
   .products-main-container .row {

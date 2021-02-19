@@ -2,16 +2,14 @@
   <div class="product-filter">
       <div v-for="(filter, filterIndex) in filters"
            :key="filterIndex">
-          <h5 class="label">{{ filter.label }}</h5>
-          <div class="ml-3">
+          <h5 class="filter">{{ filter.label }}</h5>
+          <div class="ml-3" v-for="(option, optionIndex) in filter.options" :key="optionIndex">
             <b-form-checkbox
-                v-for="(option, optionIndex) in filter.options"
                 v-model="filter.selected[optionIndex]"
                 :value="option"
-                :key="optionIndex"
                 @change="optionSelected(filterIndex, optionIndex)"
             >
-              {{ option }}
+              <span class="option">{{ option }}</span>
             </b-form-checkbox>
           </div>
         <hr class="separator"/>
@@ -59,8 +57,12 @@
     width: 100%;
   }
 
-  .label {
+  .filter {
     margin-left: 10px;
-
   }
+
+  .option {
+    font-size: 15px;
+  }
+
 </style>
