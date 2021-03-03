@@ -60,7 +60,7 @@
     data() {
       return {
         products: null,
-        productCategory: '',
+        productUrl: '',
         productsFiltered: null,
         paginatedProducts: this.products,
         pagination: {
@@ -79,15 +79,15 @@
         return this.products.length;
       },
       productCategoryIsNotEmpty() {
-        return this.productCategory !== undefined && this.productCategory.length > 0;
+        return this.productUrl !== undefined && this.productUrl.length > 0;
       }
     },
     watch: {
       '$route.params.type': {
         handler: function (val) {
-          if (this.productCategory) {
-            this.productCategory = val;
-            this.fillFilters(TYPES, this.productCategory);
+          if (this.productUrl) {
+            this.productUrl = val;
+            this.fillFilters(TYPES, this.productUrl);
             this.filterProducts();
           }
         },
@@ -131,7 +131,7 @@
         for (const key in types) {
           if (Object.prototype.hasOwnProperty.call(types, key)) {
             const type = types[key]
-            if (type.name === productType) {
+            if (type.url === productType) {
               const brands = Object.values(type.brands);
               const attributes = Object.values(type.attributes);
 
@@ -164,9 +164,9 @@
         this.productsFiltered = this.products;
       },
       filterByCategory() {
-        if (!this.productCategory)  return;
+        if (!this.productUrl)  return;
 
-        this.productsFiltered = this.products.filter(product => product.type.name === this.productCategory);
+        this.productsFiltered = this.products.filter(product => product.type.url === this.productUrl);
       },
       filterByBrands() {
         if (this.objectIsEmptyOrFullOfFalseValues(this.brandsSelected))
@@ -201,8 +201,8 @@
     },
     mounted() {
       this.products = Products.PRODUCTS;
-      this.productCategory = this.$route.params.type;
-      this.fillFilters(TYPES, this.productCategory);
+      this.productUrl = this.$route.params.type;
+      this.fillFilters(TYPES, this.productUrl);
       this.filterProducts();
     }
   }

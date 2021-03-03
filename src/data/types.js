@@ -1,6 +1,7 @@
 export const TYPES = {
     VARIS_CORABI: {
-        name: "varis-coraplari",
+        label: "Varis Çorapları",
+        url: "varis-coraplari",
         attributes: {
             "DIZ_ALTI": "Diz Altı Çoraplar",
             "DIZ_USTU": "Diz Üstü Çoraplar"
@@ -11,7 +12,8 @@ export const TYPES = {
         }
     },
     TANSIYON_ALETI: {
-        name: "tansiyon-aletleri",
+        label: "Tansiyon Aletleri",
+        url: "tansiyon-aletleri",
         attributes: {
             "KOLDAN_OLCUMLU": "Koldan Ölçüm",
             "BILEKTEN_OLCUMLU": "Bilekten Ölçüm"
@@ -22,7 +24,8 @@ export const TYPES = {
         }
     },
     SOLUNUM_CIHAZI: {
-        name: "solunum-cihazlari",
+        label: "Solunum Cihazları",
+        url: "solunum-cihazlari",
         attributes: {
 
         },
@@ -32,7 +35,8 @@ export const TYPES = {
         }
     },
     TABANLIK: {
-        name: "tabanliklar",
+        label: "Tabanlıklar",
+        url: "tabanliklar",
         attributes: {
             "KISIYE_OZEL_TABANLIK": "Kişiye Özel Tabanlık",
             "HAZIR_TABANLIK": "Hazır Tabanlık"
@@ -43,21 +47,24 @@ export const TYPES = {
         }
     },
     FIZIK_TEDAVI_URUNLERI: {
-        name: "fizik-tedavi-urunleri",
+        label: "Fizik Tedavi Ürünleri",
+        url: "fizik-tedavi-urunleri",
         attributes: {
         },
         brands: {
         }
     },
     ORTOPEDIK_URUNLER: {
-        name: "ortopedik-urunler",
+        label: "Ortopedik Ürünler",
+        url: "ortopedik-urunler",
         attributes: {
         },
         brands: {
         }
     },
     LENF_ODEM_URUNLERI: {
-        name: "lenf-odem-urunleri",
+        label: "Lenf Ödem Ürünleri",
+        url: "lenf-odem-urunleri",
         attributes: {
         },
         brands: {
