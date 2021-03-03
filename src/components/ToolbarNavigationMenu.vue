@@ -1,12 +1,16 @@
 <template>
   <md-menu md-size="auto" md-align-trigger :md-close-on-click="true" :md-close-on-select="true">
-    <md-button class="nav-button" md-menu-trigger>{{ menuTriggerLabel }}</md-button>
+    <md-button class="nav-button" md-menu-trigger>
+      {{ menuTriggerLabel }} <chevron-down class="ml-1"/>
+    </md-button>
 
     <md-menu-content>
-      <md-menu-item v-for="(link, index) in content"
-                    :key="index">
-        <router-link :to="link.url">{{ link.label }}</router-link>
-      </md-menu-item>
+      <router-link v-for="(link, index) in content"
+                   :key="index" :to="link.url">
+        <md-menu-item>
+          {{ link.label }}
+        </md-menu-item>
+      </router-link>
     </md-menu-content>
   </md-menu>
 </template>
@@ -14,8 +18,13 @@
 <script>
 import { TYPES } from "@/data/types";
 
+import ChevronDown from 'vue-material-design-icons/ChevronDown'
+
 export default {
   name: 'ToolbarProductsMenu',
+  components: {
+    ChevronDown
+  },
   props: {
     menuTriggerLabel: {
       type: String,
@@ -54,14 +63,17 @@ export default {
     padding-bottom: 0 !important;
   }
 
-  .md-menu-item a {
-    text-decoration: none !important;
+  .md-list.md-theme-default .router-link-active .md-list-item-content {
     color: inherit !important;
-    font-size: 17px;
+  }
+
+
+  .md-list-item-container {
+    font-size: 17px !important;
   }
 
   .md-menu-item :hover {
-    background-color: #dae7e8;
+    text-decoration: underline;
   }
 
   .md-toolbar-section-end a {
